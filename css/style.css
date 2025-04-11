@@ -1,1 +1,72 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f7f7f7;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 500px;
+  margin: 30px auto;
+  background-color: white;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+h1 {
+  color: #333;
+}
+
+#equation {
+  font-size: 24px;
+  margin: 20px 0;
+}
+
+#options-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  background-color: #3f51b5;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #303f9f;
+}
+
+.buttons {
+  margin-top: 20px;
+}
+
+#feedback {
+  margin-top: 15px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.success {
+  color: green;
+}
+
+.error {
+  color: red;
+}
+
+#stats {
+  margin-top: 20px;
+  font-size: 16px;
+}
 
