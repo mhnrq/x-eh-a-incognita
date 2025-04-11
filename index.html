@@ -289,23 +289,19 @@
 
     function atualizarEquacao() {
   let ladoEsquerdo = "";
-
   if (a === 1) {
     ladoEsquerdo = "x";
   } else {
     ladoEsquerdo = `${a}x`;
   }
-
   if (b > 0) {
     ladoEsquerdo += ` + ${b}`;
   } else if (b < 0) {
     ladoEsquerdo += ` - ${Math.abs(b)}`;
   }
-
   document.getElementById("equacao").textContent = `${ladoEsquerdo} = ${c}`;
   document.getElementById("instrucao").textContent = "Use as cartas para descobrir o valor de X.";
 }
-
 
     function dicaEstrategia() {
       if (b !== 0) return `Adicione ${b > 0 ? '−' + b : '+' + Math.abs(b)} aos dois lados!`;
