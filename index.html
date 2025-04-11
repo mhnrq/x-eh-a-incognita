@@ -1,57 +1,388 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>X é a Incógnita</title>
+  <style>
+    /* (seu CSS original, sem mudanças visuais) */
+    body {
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+      margin: 0;
+      padding: 20px;
+      min-height: 100vh;
+    }
+    h1 {
+      color: #00796b;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    }
+    #jogo {
+      background: white;
+      border-radius: 15px;
+      padding: 25px;
+      width: 90%;
+      max-width: 450px;
+      margin: 20px auto;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    #equacao-container {
+      background: #f5f5f5;
+      border-radius: 10px;
+      padding: 15px;
+      margin: 20px 0;
+      border: 2px dashed #00796b;
+    }
+    #equacao {
+      font-size: 28px;
+      font-weight: bold;
+      color: #333;
+      margin: 10px 0;
+    }
+    #instrucao {
+      color: #00796b;
+      font-style: italic;
+      margin: 10px 0;
+      min-height: 24px;
+    }
+    .grupo-cartas {
+      background: rgba(0, 121, 107, 0.1);
+      border-radius: 10px;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+    .cartas-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+    .carta {
+      background: #00796b;
+      color: white;
+      border: none;
+      width: 60px;
+      height: 60px;
+      border-radius: 10px;
+      font-size: 24px;
+      cursor: pointer;
+      transition: transform 0.2s, background 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .carta:hover {
+      background: #00897b;
+      transform: scale(1.05);
+    }
+    .carta:active {
+      transform: scale(0.95);
+    }
+    #acoes {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+    .btn-acao {
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: opacity 0.2s;
+    }
+    .btn-acao:hover {
+      opacity: 0.9;
+    }
+    #btn-reset {
+      background: #ff5722;
+    }
+    #btn-reset:hover {
+      background: #e64a19;
+    }
+    #btn-limpar {
+      background: #607d8b;
+    }
+    #btn-limpar:hover {
+      background: #455a64;
+    }
+    #btn-proxima {
+      background: #8bc34a;
+      display: none;
+    }
+    #btn-proxima:hover {
+      background: #7cb342;
+    }
+    #relatorio {
+      background: rgba(0, 121, 107, 0.1);
+      border-radius: 10px;
+      padding: 15px;
+      margin-top: 20px;
+    }
+    #relatorio h3 {
+      color: #00796b;
+      margin-top: 0;
+    }
+    .destaque {
+      font-weight: bold;
+      color: #d84315;
+    }
+    #relatorio-acumulado {
+      margin-top: 20px;
+      background: rgba(0, 121, 107, 0.2);
+      border-radius: 10px;
+      padding: 10px;
+    }
 
-  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
-  
-  <link rel="stylesheet" href="css/style.css">
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+#equacao.resolvido {
+  animation: pulse 0.6s ease-in-out;
+}
+  </style>
 </head>
-  
 <body>
-  <h1>🔍 X é a Incógnita</h1>
-
+  <h1>🔍 X é a Incógnita 🔍</h1>
   <div id="jogo">
     <div id="equacao-container">
-      <div id="equacao">3x + 3 = 33</div>
-      <div id="instrucao">Use as cartas para descobrir o valor de X.</div>
+      <div id="equacao">1x + 5 = 7</div>
+      <div id="instrucao">Use as cartas para descobrir o valor de x!</div>
     </div>
 
     <div class="grupo-cartas">
-      <div class="cartas-container" id="cartas">
-        <!-- Essas cartas são exemplos; o JS vai preencher depois se quiser -->
-        <button class="carta">+1</button>
-        <button class="carta">+2</button>
-        <button class="carta">-1</button>
-        <button class="carta">+3</button>
-        <button class="carta">-2</button>
+      <div class="cartas-container">
+        <button class="carta" onclick="usarCarta('+', 2)">+2</button>
+        <button class="carta" onclick="usarCarta('-', 2)">−2</button>
+        <button class="carta" onclick="usarCarta('*', 2)">×2</button>
+        <button class="carta" onclick="usarCarta('/', 2)">÷2</button>
+      </div>
+    </div>
+
+    <div class="grupo-cartas">
+      <div class="cartas-container">
+        <button class="carta" onclick="usarCarta('+', 3)">+3</button>
+        <button class="carta" onclick="usarCarta('-', 3)">−3</button>
+        <button class="carta" onclick="usarCarta('*', 3)">×3</button>
+        <button class="carta" onclick="usarCarta('/', 3)">÷3</button>
+      </div>
+    </div>
+
+    <div class="grupo-cartas">
+      <div class="cartas-container">
+        <button class="carta" onclick="usarCarta('+', 5)">+5</button>
+        <button class="carta" onclick="usarCarta('-', 5)">−5</button>
+        <button class="carta" onclick="usarCarta('*', 5)">×5</button>
+        <button class="carta" onclick="usarCarta('/', 5)">÷5</button>
       </div>
     </div>
 
     <div id="acoes">
-      <button class="btn-acao" id="btn-limpar">🧹 Limpar</button>
-      <button class="btn-acao" id="btn-reset">🔁 Nova Sessão</button>
-      <button class="btn-acao" id="btn-proxima">➡️ Próxima</button>
-      <button class="btn-acao" id="btn-nova-equacao">🧪 Nova Equação</button>
+      <button id="btn-limpar" class="btn-acao" onclick="limparJogadas()">↺ Limpar</button>
+      <button id="btn-reset" class="btn-acao" onclick="resetarJogo(true)">↻ Nova Sessão</button>
+      <button id="btn-proxima" class="btn-acao" onclick="proximaEquacao()">⏩ Próxima</button>
+      <button id="btn-nova-equacao" class="btn-acao" style="background-color: #007BFF; color: white;" onclick="novaEquacao()">🆕 Nova Equação</button>
     </div>
 
     <div id="relatorio">
       <h3>🏆 Equação Atual</h3>
-      <p><span class="destaque">Tempo:</span> <span id="tempo-equacao">0 segundos</span></p>
-      <p><span class="destaque">Jogadas:</span> <span id="jogadas-equacao">0</span></p>
-    </div>
-
-    <div id="relatorio-acumulado">
-      <h3>📊 Total da Sessão</h3>
-      <p>Equações resolvidas: <span id="total-equacoes">0</span></p>
-      <p>Tempo total: <span id="tempo-total">0 segundos</span></p>
-      <p>Jogadas totais: <span id="jogadas-totais">0</span></p>
+      <p>Tempo: <span id="tempo" class="destaque">0</span> segundos</p>
+      <p>Jogadas: <span id="jogadas" class="destaque">0</span></p>
+      
+      <div id="relatorio-acumulado">
+        <h3>📊 Total da Sessão</h3>
+        <p>Equações resolvidas: <span id="total-equacoes" class="destaque">0</span></p>
+        <p>Tempo total: <span id="tempo-total" class="destaque">0</span> segundos</p>
+        <p>Jogadas totais: <span id="jogadas-totais" class="destaque">0</span></p>
+      </div>
     </div>
   </div>
 
-  <script src="js/script.js"></script>
+  <script>
+    let a = 1, b = 5, c = 7;
+    let jogadas = 0;
+    let tempoInicio = 0;
+    let cronometro;
+    let equacaoOriginal = { a: 1, b: 5, c: 7 };
+    let cronometroRodando = false;
+
+    let totalEquacoes = localStorage.getItem('totalEquacoes') ? parseInt(localStorage.getItem('totalEquacoes')) : 0;
+    let tempoTotal = localStorage.getItem('tempoTotal') ? parseInt(localStorage.getItem('tempoTotal')) : 0;
+    let totalJogadas = localStorage.getItem('totalJogadas') ? parseInt(localStorage.getItem('totalJogadas')) : 0;
+
+    function iniciarCronometro() {
+      tempoInicio = new Date().getTime();
+      clearInterval(cronometro);
+      cronometro = setInterval(atualizarTempo, 200);
+      cronometroRodando = true;
+    }
+
+    function limparJogadas() {
+      a = equacaoOriginal.a;
+      b = equacaoOriginal.b;
+      c = equacaoOriginal.c;
+      jogadas = 0;
+      document.getElementById("jogadas").textContent = "0";
+      atualizarEquacao();
+    }
+
+    function gerarEquacao() {
+      const fatoresInteressantes = [2, 3, 5]; // só positivos!
+      x = Math.floor(Math.random() * 21) - 10; // x entre -10 e 10
+      a = fatoresInteressantes[Math.floor(Math.random() * fatoresInteressantes.length)];
+      b = Math.floor(Math.random() * 21) - 10;
+      c = a * x + b;
+
+      equacaoOriginal = { a, b, c };
+    }
+
+    function proximaEquacao() {
+      gerarEquacao();
+      jogadas = 0;
+      document.getElementById("btn-proxima").style.display = "none";
+      document.getElementById("btn-limpar").style.display = "block";
+      document.getElementById("btn-reset").style.display = "block";
+      document.getElementById("btn-nova-equacao").style.display = "inline-block";
+      document.getElementById("tempo").textContent = "0";
+      document.getElementById("jogadas").textContent = "0";
+      atualizarEquacao();
+      setTimeout(iniciarCronometro, 1500);
+    }
+
+    function resetarJogo(confirmar = false) {
+      if (confirmar && !confirm("Isso criará uma nova sessão e apagará todos os dados. Continuar?")) return;
+      totalEquacoes = 0;
+      tempoTotal = 0;
+      totalJogadas = 0;
+
+      localStorage.clear();
+
+      jogadas = 0;
+      a = 1;
+      b = 5;
+      c = 7;
+      equacaoOriginal = { a, b, c };
+
+      document.getElementById("tempo").textContent = "0";
+      document.getElementById("jogadas").textContent = "0";
+      document.getElementById("btn-proxima").style.display = "none";
+      document.getElementById("btn-limpar").style.display = "block";
+      document.getElementById("btn-reset").style.display = "block";
+
+      atualizarRelatorioAcumulado();
+      atualizarEquacao();
+      setTimeout(iniciarCronometro, 1500);
+    }
+
+    function atualizarEquacao() {
+  let ladoEsquerdo = "";
+
+  if (a === 1) {
+    ladoEsquerdo = "x";
+  } else {
+    ladoEsquerdo = `${a}x`;
+  }
+
+  if (b > 0) {
+    ladoEsquerdo += ` + ${b}`;
+  } else if (b < 0) {
+    ladoEsquerdo += ` - ${Math.abs(b)}`;
+  }
+
+  document.getElementById("equacao").textContent = `${ladoEsquerdo} = ${c}`;
+  document.getElementById("instrucao").textContent = "Use as cartas para descobrir o valor de X.";
+}
+
+
+    function dicaEstrategia() {
+      if (b !== 0) return `Adicione ${b > 0 ? '−' + b : '+' + Math.abs(b)} aos dois lados!`;
+      if (a !== 1) return `Divida os dois lados por ${a}!`;
+      return `✅ x = ${c}`;
+    }
+
+    function usarCarta(operacao, valor) {
+      jogadas++;
+      document.getElementById("jogadas").textContent = jogadas;
+
+      switch (operacao) {
+        case '+': b += valor; c += valor; break;
+        case '-': b -= valor; c -= valor; break;
+        case '*': a *= valor; b *= valor; c *= valor; break;
+        case '/': a /= valor; b /= valor; c /= valor; break;
+      }
+
+      atualizarEquacao();
+      verificarVitoria();
+    }
+
+    function verificarVitoria() {
+  if (a === 1 && b === 0) {
+    const tempoEquacao = Math.floor((new Date().getTime() - tempoInicio) / 1000);
+    clearInterval(cronometro);
+    cronometroRodando = false;
+
+    totalEquacoes++;
+    tempoTotal += tempoEquacao;
+    totalJogadas += jogadas;
+
+    localStorage.setItem('totalEquacoes', totalEquacoes);
+    localStorage.setItem('tempoTotal', tempoTotal);
+    localStorage.setItem('totalJogadas', totalJogadas);
+
+    document.getElementById("tempo").textContent = tempoEquacao;
+    document.getElementById("jogadas").textContent = jogadas;
+    document.getElementById("btn-limpar").style.display = "none";
+    document.getElementById("btn-reset").style.display = "none";
+    document.getElementById("btn-nova-equacao").style.display = "none";
+    document.getElementById("btn-proxima").style.display = "block";
+    document.getElementById("instrucao").textContent = "🎉 Parabéns! Vamos para a próxima?";
+    atualizarRelatorioAcumulado();
+
+    // Aqui entra a animação pulse
+    const equacaoEl = document.getElementById("equacao");
+    equacaoEl.classList.add("resolvido");
+    setTimeout(() => equacaoEl.classList.remove("resolvido"), 800); // remove após animação
+  }
+}
+
+
+    function atualizarTempo() {
+      const tempoAtual = Math.floor((new Date().getTime() - tempoInicio) / 1000);
+      document.getElementById("tempo").textContent = tempoAtual;
+    }
+
+    function atualizarRelatorioAcumulado() {
+      document.getElementById("total-equacoes").textContent = totalEquacoes;
+      document.getElementById("tempo-total").textContent = tempoTotal;
+      document.getElementById("jogadas-totais").textContent = totalJogadas;
+    }
+
+    function novaEquacao() {
+      gerarEquacao();
+      jogadas = 0;
+      document.getElementById("jogadas").textContent = jogadas;
+      atualizarEquacao();
+    }
+
+    window.onload = function() {
+      gerarEquacao();
+      atualizarEquacao();
+      atualizarRelatorioAcumulado();
+      setTimeout(iniciarCronometro, 1500);
+    };
+  </script>
 </body>
 </html>
