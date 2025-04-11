@@ -1,33 +1,65 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>X é a Incógnita</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>X é a Incógnita</h1>
-
-    <div id="equation"></div>
-
-    <div id="options-container"></div>
-
-    <div id="feedback"></div>
-
-    <div class="buttons">
-      <button onclick="generateEquation()">Nova Equação</button>
-      <button onclick="resetSession()">Nova Sessão</button>
+  <h1>🔍 X é a Incógnita 🔍</h1>
+  <div id="jogo">
+    <div id="equacao-container">
+      <div id="equacao">1x + 5 = 7</div>
+      <div id="instrucao">Use as cartas para descobrir o valor de x!</div>
     </div>
 
-    <div id="stats">
-      <p><strong>Acertos:</strong> <span id="correct-count">0</span></p>
-      <p><strong>Erros:</strong> <span id="incorrect-count">0</span></p>
+    <div class="grupo-cartas">
+      <div class="cartas-container">
+        <button class="carta" onclick="usarCarta('+', 2)">+2</button>
+        <button class="carta" onclick="usarCarta('-', 2)">−2</button>
+        <button class="carta" onclick="usarCarta('*', 2)">×2</button>
+        <button class="carta" onclick="usarCarta('/', 2)">÷2</button>
+      </div>
+    </div>
+
+    <div class="grupo-cartas">
+      <div class="cartas-container">
+        <button class="carta" onclick="usarCarta('+', 3)">+3</button>
+        <button class="carta" onclick="usarCarta('-', 3)">−3</button>
+        <button class="carta" onclick="usarCarta('*', 3)">×3</button>
+        <button class="carta" onclick="usarCarta('/', 3)">÷3</button>
+      </div>
+    </div>
+
+    <div class="grupo-cartas">
+      <div class="cartas-container">
+        <button class="carta" onclick="usarCarta('+', 5)">+5</button>
+        <button class="carta" onclick="usarCarta('-', 5)">−5</button>
+        <button class="carta" onclick="usarCarta('*', 5)">×5</button>
+        <button class="carta" onclick="usarCarta('/', 5)">÷5</button>
+      </div>
+    </div>
+
+    <div id="acoes">
+      <button id="btn-limpar" class="btn-acao" onclick="limparJogadas()">↺ Limpar</button>
+      <button id="btn-reset" class="btn-acao" onclick="resetarJogo(true)">↻ Nova Sessão</button>
+      <button id="btn-proxima" class="btn-acao" onclick="proximaEquacao()">⏩ Próxima</button>
+      <button id="btn-nova-equacao" class="btn-acao" style="background-color: #007BFF; color: white;" onclick="novaEquacao()">🆕 Nova Equação</button>
+    </div>
+
+    <div id="relatorio">
+      <h3>🏆 Equação Atual</h3>
+      <p>Tempo: <span id="tempo" class="destaque">0</span> segundos</p>
+      <p>Jogadas: <span id="jogadas" class="destaque">0</span></p>
+      
+      <div id="relatorio-acumulado">
+        <h3>📊 Total da Sessão</h3>
+        <p>Equações resolvidas: <span id="total-equacoes" class="destaque">0</span></p>
+        <p>Tempo total: <span id="tempo-total" class="destaque">0</span> segundos</p>
+        <p>Jogadas totais: <span id="jogadas-totais" class="destaque">0</span></p>
+      </div>
     </div>
   </div>
 
   <script src="js/script.js"></script>
 </body>
 </html>
-
