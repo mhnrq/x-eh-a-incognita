@@ -1,72 +1,149 @@
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f7f7f7;
-  margin: 0;
-  padding: 0;
-}
-
-.container {
-  max-width: 500px;
-  margin: 30px auto;
-  background-color: white;
-  padding: 20px;
-  border-radius: 16px;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif;
   text-align: center;
+  background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+  margin: 0;
+  padding: 20px;
+  min-height: 100vh;
 }
-
 h1 {
-  color: #333;
+  color: #00796b;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
 }
-
-#equation {
-  font-size: 24px;
+#jogo {
+  background: white;
+  border-radius: 15px;
+  padding: 25px;
+  width: 90%;
+  max-width: 450px;
+  margin: 20px auto;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+#equacao-container {
+  background: #f5f5f5;
+  border-radius: 10px;
+  padding: 15px;
   margin: 20px 0;
+  border: 2px dashed #00796b;
 }
-
-#options-container {
+#equacao {
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+  margin: 10px 0;
+}
+#instrucao {
+  color: #00796b;
+  font-style: italic;
+  margin: 10px 0;
+  min-height: 24px;
+}
+.grupo-cartas {
+  background: rgba(0, 121, 107, 0.1);
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+.cartas-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 12px;
-  margin: 20px 0;
+  gap: 10px;
 }
-
-button {
-  padding: 10px 20px;
-  font-size: 16px;
-  border: none;
-  background-color: #3f51b5;
+.carta {
+  background: #00796b;
   color: white;
-  border-radius: 8px;
+  border: none;
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+  font-size: 24px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: transform 0.2s, background 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-
-button:hover {
-  background-color: #303f9f;
+.carta:hover {
+  background: #00897b;
+  transform: scale(1.05);
 }
-
-.buttons {
+.carta:active {
+  transform: scale(0.95);
+}
+#acoes {
   margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
 }
-
-#feedback {
-  margin-top: 15px;
-  font-size: 18px;
+.btn-acao {
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
   font-weight: bold;
+  transition: opacity 0.2s;
 }
-
-.success {
-  color: green;
+.btn-acao:hover {
+  opacity: 0.9;
 }
-
-.error {
-  color: red;
+#btn-reset {
+  background: #ff5722;
 }
-
-#stats {
+#btn-reset:hover {
+  background: #e64a19;
+}
+#btn-limpar {
+  background: #607d8b;
+}
+#btn-limpar:hover {
+  background: #455a64;
+}
+#btn-proxima {
+  background: #8bc34a;
+  display: none;
+}
+#btn-proxima:hover {
+  background: #7cb342;
+}
+#relatorio {
+  background: rgba(0, 121, 107, 0.1);
+  border-radius: 10px;
+  padding: 15px;
   margin-top: 20px;
-  font-size: 16px;
+}
+#relatorio h3 {
+  color: #00796b;
+  margin-top: 0;
+}
+.destaque {
+  font-weight: bold;
+  color: #d84315;
+}
+#relatorio-acumulado {
+  margin-top: 20px;
+  background: rgba(0, 121, 107, 0.2);
+  border-radius: 10px;
+  padding: 10px;
 }
 
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+#equacao.resolvido {
+  animation: pulse 0.6s ease-in-out;
+}
