@@ -12,61 +12,46 @@
 </head>
   
 <body>
-  <h1><span aria-hidden="true">🔍</span> X é a Incógnita <span aria-hidden="true">🔍</span></h1>
+  <h1>🔍 X é a Incógnita</h1>
+
   <div id="jogo">
     <div id="equacao-container">
-      <div id="equacao">1x + 5 = 7</div>
-      <div id="instrucao">Use as cartas para descobrir o valor de x!</div>
+      <div id="equacao">3x + 3 = 33</div>
+      <div id="instrucao">Use as cartas para descobrir o valor de X.</div>
     </div>
 
     <div class="grupo-cartas">
-      <div class="cartas-container">
-        <button class="carta" onclick="usarCarta('+', 2)">+2</button>
-        <button class="carta" onclick="usarCarta('-', 2)">−2</button>
-        <button class="carta" onclick="usarCarta('*', 2)">×2</button>
-        <button class="carta" onclick="usarCarta('/', 2)">÷2</button>
-      </div>
-    </div>
-
-    <div class="grupo-cartas">
-      <div class="cartas-container">
-        <button class="carta" onclick="usarCarta('+', 3)">+3</button>
-        <button class="carta" onclick="usarCarta('-', 3)">−3</button>
-        <button class="carta" onclick="usarCarta('*', 3)">×3</button>
-        <button class="carta" onclick="usarCarta('/', 3)">÷3</button>
-      </div>
-    </div>
-
-    <div class="grupo-cartas">
-      <div class="cartas-container">
-        <button class="carta" onclick="usarCarta('+', 5)">+5</button>
-        <button class="carta" onclick="usarCarta('-', 5)">−5</button>
-        <button class="carta" onclick="usarCarta('*', 5)">×5</button>
-        <button class="carta" onclick="usarCarta('/', 5)">÷5</button>
+      <div class="cartas-container" id="cartas">
+        <!-- Essas cartas são exemplos; o JS vai preencher depois se quiser -->
+        <button class="carta">+1</button>
+        <button class="carta">+2</button>
+        <button class="carta">-1</button>
+        <button class="carta">+3</button>
+        <button class="carta">-2</button>
       </div>
     </div>
 
     <div id="acoes">
-      <button id="btn-limpar" class="btn-acao" onclick="limparJogadas()">↺ Limpar</button>
-      <button id="btn-reset" class="btn-acao" onclick="resetarJogo(true)">↻ Nova Sessão</button>
-      <button id="btn-proxima" class="btn-acao" onclick="proximaEquacao()">⏩ Próxima</button>
-      <button id="btn-nova-equacao" class="btn-acao" style="background-color: #007BFF; color: white;" onclick="novaEquacao()">🆕 Nova Equação</button>
+      <button class="btn-acao" id="btn-limpar">🧹 Limpar</button>
+      <button class="btn-acao" id="btn-reset">🔁 Nova Sessão</button>
+      <button class="btn-acao" id="btn-proxima">➡️ Próxima</button>
+      <button class="btn-acao" id="btn-nova-equacao">🧪 Nova Equação</button>
     </div>
 
     <div id="relatorio">
       <h3>🏆 Equação Atual</h3>
-      <p>Tempo: <span id="tempo" class="destaque">0</span> segundos</p>
-      <p>Jogadas: <span id="jogadas" class="destaque">0</span></p>
-      
-      <div id="relatorio-acumulado">
-        <h3>📊 Total da Sessão</h3>
-        <p>Equações resolvidas: <span id="total-equacoes" class="destaque">0</span></p>
-        <p>Tempo total: <span id="tempo-total" class="destaque">0</span> segundos</p>
-        <p>Jogadas totais: <span id="jogadas-totais" class="destaque">0</span></p>
-      </div>
+      <p><span class="destaque">Tempo:</span> <span id="tempo-equacao">0 segundos</span></p>
+      <p><span class="destaque">Jogadas:</span> <span id="jogadas-equacao">0</span></p>
+    </div>
+
+    <div id="relatorio-acumulado">
+      <h3>📊 Total da Sessão</h3>
+      <p>Equações resolvidas: <span id="total-equacoes">0</span></p>
+      <p>Tempo total: <span id="tempo-total">0 segundos</span></p>
+      <p>Jogadas totais: <span id="jogadas-totais">0</span></p>
     </div>
   </div>
-  
+
   <script src="js/script.js"></script>
 </body>
 </html>
