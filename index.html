@@ -1,1 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>X é a Incógnita</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>X é a Incógnita</h1>
+
+    <div id="equation"></div>
+
+    <div id="options-container"></div>
+
+    <div id="feedback"></div>
+
+    <div class="buttons">
+      <button onclick="generateEquation()">Nova Equação</button>
+      <button onclick="resetSession()">Nova Sessão</button>
+    </div>
+
+    <div id="stats">
+      <p><strong>Acertos:</strong> <span id="correct-count">0</span></p>
+      <p><strong>Erros:</strong> <span id="incorrect-count">0</span></p>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
 
